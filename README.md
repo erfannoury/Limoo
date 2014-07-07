@@ -6,7 +6,6 @@ Limoo Diet App
 Contributers:
 * Ali Choopan
 * Erfan Noury
-* 
 
 
 
