@@ -1,8 +1,6 @@
 package org.limoo.limoo.model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.IllegalFormatFlagsException;
 
 /**
  * Created by Erfan on 7/8/2014.
@@ -10,11 +8,11 @@ import java.util.IllegalFormatFlagsException;
 public class Food
 {
     private String foodName;
-    private IFoodUnit baseUnit;
+    private FoodUnit baseUnit;
     /*
      List of units for this type of food, this list excludes the base unit
      */
-    private ArrayList<IFoodUnit> units;
+    private ArrayList<FoodUnit> units;
 
 
     /*
@@ -25,7 +23,7 @@ public class Food
     /*
      Constructor without adding a list of additional units
      */
-    public Food(String foodName, IFoodUnit baseUnit)
+    public Food(String foodName, FoodUnit baseUnit)
     {
         this.foodName = foodName;
         this.baseUnit = baseUnit;
@@ -34,7 +32,7 @@ public class Food
     /*
      Constructor with adding a list of additional units
      */
-    public Food(String foodName, IFoodUnit baseUnit, ArrayList<IFoodUnit> additionalUnits)
+    public Food(String foodName, FoodUnit baseUnit, ArrayList<FoodUnit> additionalUnits)
     {
         this.foodName = foodName;
         this.baseUnit = baseUnit;
@@ -44,7 +42,7 @@ public class Food
             this.units = new ArrayList<>();
     }
 
-    public IFoodUnit getBaseUnit()
+    public FoodUnit getBaseUnit()
     {
         return this.baseUnit;
     }
@@ -52,7 +50,7 @@ public class Food
     /*
      Add an additional unit to the list of additional units
      */
-    public void addAdditionalUnit(IFoodUnit unit)
+    public void addAdditionalUnit(FoodUnit unit)
     {
         if(!unit.equals(null))
             return;
@@ -62,7 +60,7 @@ public class Food
     /*
      get the list of additional units
      */
-    public ArrayList<IFoodUnit> getAdditionalUnits()
+    public ArrayList<FoodUnit> getAdditionalUnits()
     {
         return this.units;
     }
@@ -70,9 +68,9 @@ public class Food
     /*
      get all the units of the food, including the base unit
      */
-    public ArrayList<IFoodUnit> getAllUnits()
+    public ArrayList<FoodUnit> getAllUnits()
     {
-        ArrayList<IFoodUnit> allUnits = new ArrayList<>();
+        ArrayList<FoodUnit> allUnits = new ArrayList<>();
         allUnits.add(baseUnit);
         allUnits.addAll(this.units);
         return allUnits;

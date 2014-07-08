@@ -1,8 +1,6 @@
 package org.limoo.limoo.model;
 
 
-import org.limoo.limoo.model.MealType;
-
 /**
  * Created by Erfan on 7/8/2014.
  */
@@ -16,7 +14,7 @@ public class Meal
     private MealType type;
     private int amount;
     private Food food;
-    private IFoodUnit unit;
+    private FoodUnit unit;
 
     public Meal()
     {}
@@ -24,7 +22,7 @@ public class Meal
     /*
      Constructor
      */
-    public Meal(Food _food, IFoodUnit _unit, int _amount, MealType _type)
+    public Meal(Food _food, FoodUnit _unit, int _amount, MealType _type)
     {
         this.food = _food;
         this.unit = _unit;
@@ -34,7 +32,7 @@ public class Meal
     /*
      Constructor in which MealType is not given as input
      */
-    public Meal(Food _food, IFoodUnit _unit, int _amount)
+    public Meal(Food _food, FoodUnit _unit, int _amount)
     {
         this(_food, _unit, _amount, MealType.UNKNOWN);
     }
@@ -63,7 +61,7 @@ public class Meal
     /*
      Get the unit of the food, this will be the unit of the user input
       */
-    public IFoodUnit getUnit()
+    public FoodUnit getUnit()
     {
         return this.unit;
     }
