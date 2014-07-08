@@ -36,11 +36,7 @@ public class Meal
      */
     public Meal(Food _food, IFoodUnit _unit, int _amount)
     {
-        this.food = _food;
-        this.unit = _unit;
-        this.amount = _amount;
-        this.type = MealType.UNKNOWN;
-
+        this(_food, _unit, _amount, MealType.UNKNOWN);
     }
 
     /*
