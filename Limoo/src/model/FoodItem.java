@@ -11,8 +11,8 @@ package model;
  */
 public class FoodItem
 {
-    private int amount;
-    private Food food;
+    private double amount;
+    private String foodName;
     private FoodUnit unit;
 
     public FoodItem()
@@ -21,9 +21,9 @@ public class FoodItem
     /*
      Constructor
      */
-    public FoodItem(Food _food, FoodUnit _unit, int _amount)
+    public FoodItem(String _foodName, FoodUnit _unit, double _amount)
     {
-        this.food = _food;
+        this.foodName = _foodName;
         this.unit = _unit;
         this.amount = _amount;
     }
@@ -32,15 +32,15 @@ public class FoodItem
     /*
      Get the amount of the meal user has taken, this value should be in the base unit of each food type
      */
-    public int getAmount()
+    public double getAmount()
     {
         return this.amount;
     }
 
 
-    public Food getFood()
+    public String getFoodName()
     {
-        return this.food;
+        return this.foodName;
     }
     /*
      Get the unit of the food, this will be the unit of the user input

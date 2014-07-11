@@ -5,7 +5,10 @@ import java.util.ArrayList;
 /**
  * Created by Erfan on 7/8/2014.
  */
-public class Food
+/*
+ * This class contains data for each food. Each food has a name, has a base unit and a list of other additional units.
+ */
+public class FoodData
 {
     private String foodName;
     private FoodUnit baseUnit;
@@ -18,12 +21,12 @@ public class Food
     /*
      Default constructor
      */
-    private Food() { }
+    private FoodData() { }
 
     /*
      Constructor without adding a list of additional units
      */
-    public Food(String foodName, FoodUnit baseUnit)
+    public FoodData(String foodName, FoodUnit baseUnit)
     {
         this.foodName = foodName;
         this.baseUnit = baseUnit;
@@ -32,7 +35,7 @@ public class Food
     /*
      Constructor with adding a list of additional units
      */
-    public Food(String foodName, FoodUnit baseUnit, ArrayList<FoodUnit> additionalUnits)
+    public FoodData(String foodName, FoodUnit baseUnit, ArrayList<FoodUnit> additionalUnits)
     {
         this.foodName = foodName;
         this.baseUnit = baseUnit;
