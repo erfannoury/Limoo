@@ -27,6 +27,9 @@ public class FoodUnit
         this(name, energy, 1.0);
     }
 
+    /*
+     * Get energy in kCal
+     */
     public double getEnergy()
     {
         return this.energy;

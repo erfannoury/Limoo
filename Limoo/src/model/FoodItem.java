@@ -49,6 +49,14 @@ public class FoodItem
     {
         return this.unit;
     }
+    
+    /*
+     * Get this FoodItem's total energy in kCal
+     */
+    public double getEnergy()
+    {
+    	return this.unit.totalEnergy(this.amount);
+    }
 }
 
 
