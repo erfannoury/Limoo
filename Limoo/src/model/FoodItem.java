@@ -12,7 +12,7 @@ package model;
 public class FoodItem
 {
     private int amount;
-    private Food food;
+    private String foodName;
     private FoodUnit unit;
 
     public FoodItem()
@@ -21,9 +21,9 @@ public class FoodItem
     /*
      Constructor
      */
-    public FoodItem(Food _food, FoodUnit _unit, int _amount)
+    public FoodItem(String _foodName, FoodUnit _unit, int _amount)
     {
-        this.food = _food;
+        this.foodName = _foodName;
         this.unit = _unit;
         this.amount = _amount;
     }
@@ -38,9 +38,9 @@ public class FoodItem
     }
 
 
-    public Food getFood()
+    public String getFoodName()
     {
-        return this.food;
+        return this.foodName;
     }
     /*
      Get the unit of the food, this will be the unit of the user input
