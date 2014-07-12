@@ -45,6 +45,11 @@ public class FoodData
             this.units = new ArrayList<>();
     }
 
+    public String getFoodName()
+    {
+    	return this.foodName;
+    }
+    
     public FoodUnit getBaseUnit()
     {
         return this.baseUnit;
