@@ -45,6 +45,16 @@ public class Meal
 	}
 	
 	/*
+	 * Get total energy of a meal
+	 */
+	public double getMealEnergy(){
+		double res = 0.0;
+		for (FoodItem foodItem : foodItemsGroup) {
+			res += foodItem.getEnergy();
+		}
+		return res;
+	}
+	/*
 	 * Get the type of this meal
 	 */
 	public MealType getMealType()

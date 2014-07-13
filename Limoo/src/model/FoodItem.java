@@ -9,6 +9,7 @@ package model;
   This class defines the basic FoodItem object type. A FoodItem consists of a food, amount of it, unit of measurement and the time of
   the day this meal had been taken.
  */
+//TODO: where is the "time" of a FoodItem?
 public class FoodItem
 {
     private double amount;

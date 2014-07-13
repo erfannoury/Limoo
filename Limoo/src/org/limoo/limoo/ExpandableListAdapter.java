@@ -1,13 +1,14 @@
 package org.limoo.limoo;
 
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import model.FoodItem;
 import model.Meal;
-
 import android.content.Context;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -61,10 +62,12 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 				.findViewById(R.id.itemAmount);
 		TextView itemFood = (TextView) convertView
 				.findViewById(R.id.itemFood);
-		itemEnergy.setText(foodItem.getEnergy()+"");
+		
+		NumberFormat formatter = new DecimalFormat("#0.00");
+		itemEnergy.setText(formatter.format(foodItem.getEnergy())+"");
 		itemUnit.setText(foodItem.getUnit().getUnitName()+"");
-		itemAmout.setText(foodItem.getEnergy()+"");
-//		itemFood.setText(foodItem.+"");
+		itemAmout.setText(formatter.format(foodItem.getAmount())+"");
+		itemFood.setText(foodItem.getFoodName()+"");
 
 		return convertView;
 	}
@@ -93,17 +96,25 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 	@Override
 	public View getGroupView(int groupPosition, boolean isExpanded,
 			View convertView, ViewGroup parent) {
-		String headerTitle = (String) getGroup(groupPosition);
+		Meal meal = (Meal) getGroup(groupPosition);
+		NumberFormat formatter = new DecimalFormat("#0.00");
+		String mealType = meal.getMealType().toString();
+		String mealEnergy = formatter.format(meal.getMealEnergy())+"کیلوکالری";
 		if (convertView == null) {
 			LayoutInflater infalInflater = (LayoutInflater) this._context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = infalInflater.inflate(R.layout.list_group, null);
 		}
 
-		TextView lblListHeader = (TextView) convertView
-				.findViewById(R.id.lblListHeader);
-		lblListHeader.setTypeface(null, Typeface.BOLD);
-		lblListHeader.setText(headerTitle);
+		TextView mealTypeView = (TextView) convertView
+				.findViewById(R.id.mealType);
+		mealTypeView.setTypeface(null, Typeface.BOLD);
+		mealTypeView.setText(mealType);
+		
+		TextView mealEnergyView = (TextView) convertView
+				.findViewById(R.id.mealEnergy);
+		mealEnergyView.setTypeface(null, Typeface.BOLD);
+		mealEnergyView.setText(mealEnergy);
 
 		return convertView;
 	}
