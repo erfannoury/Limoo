@@ -1,3 +1,4 @@
+package org.limoo.limoo;
 
 
 import java.util.ArrayList;
@@ -6,8 +7,6 @@ import java.util.List;
 
 import model.FoodItem;
 import model.Meal;
-
-import org.limoo.limoo.R;
 
 import android.content.Context;
 import android.graphics.Typeface;
