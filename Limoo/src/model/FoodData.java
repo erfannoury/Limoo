@@ -26,12 +26,21 @@ public class FoodData
     /*
      Constructor without adding a list of additional units
      */
-    public FoodData(String foodName, FoodUnit baseUnit)
+    public FoodData(String foodName, FoodUnit unit, boolean isBaseUnit)
     {
         this.foodName = foodName;
-        this.baseUnit = baseUnit;
-        this.units = new ArrayList<>();
+        if(isBaseUnit)
+        {
+        	this.baseUnit = baseUnit;
+        	this.units = new ArrayList<>();        	
+        }
+        else
+        {
+        	this.units = new ArrayList<>();
+        	this.units.add(unit);
+        }
     }
+    
     /*
      Constructor with adding a list of additional units
      */
@@ -45,19 +54,27 @@ public class FoodData
             this.units = new ArrayList<>();
     }
 
+    public String getFoodName()
+    {
+    	return this.foodName;
+    }
+    
     public FoodUnit getBaseUnit()
     {
         return this.baseUnit;
     }
 
     /*
-     Add an additional unit to the list of additional units
+     Add a new unit to the list of units
      */
-    public void addAdditionalUnit(FoodUnit unit)
+    public void addAdditionalUnit(FoodUnit unit, boolean isBaseUnit)
     {
         if(!unit.equals(null))
             return;
-        this.units.add(unit);
+        if(isBaseUnit)
+        	this.baseUnit = unit;
+        else
+        	this.units.add(unit);        	
     }
 
     /*
