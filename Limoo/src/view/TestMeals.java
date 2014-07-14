@@ -12,7 +12,7 @@ public class TestMeals
 		Meal meal = new Meal(type);
 		for(int i = 0; i < 5; i++)
 		{
-			meal.addnewFoodItem(foodNames[new Random().nextInt(foodNames.length)], foodUnits[new Random().nextInt(foodUnits.length)], new Random().nextDouble());
+			meal.addnewFoodItem(foodNames[new Random().nextInt(foodNames.length)], foodUnits[new Random().nextInt(foodUnits.length)], new Random().nextDouble()*5);
 		}
 		return meal;
 	}

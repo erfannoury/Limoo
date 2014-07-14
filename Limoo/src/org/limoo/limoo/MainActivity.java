@@ -1,8 +1,10 @@
 package org.limoo.limoo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import view.TestMeals;
+import model.ActivityType;
 import model.FoodItem;
 import model.Meal;
 import model.MealType;
@@ -13,11 +15,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.os.Build;
 
@@ -33,38 +39,49 @@ public class MainActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-//		FrameLayout fl = (FrameLayout)findViewById(R.id.container);
-//		if(fl == null)
-//			Log.i("Shit","shit happened");
-		Log.i("start","line 34");
 //		if (savedInstanceState == null) {
 //			getSupportFragmentManager().beginTransaction()
 //					.add(R.id.container, new PlaceholderFragment()).commit();
 //		}
 		
 
+/*
+ * Progressbar		
+ */
+		ProgressBar pb = (ProgressBar)findViewById(R.id.progressBar);
+		pb.setProgress(76);
+/*
+ * Expandable list
+ */
 		// get the listview
-		Log.i("get", "get List View 42");
 		expListView = (ExpandableListView) findViewById(R.id.lvExp); 
-//		TextView t = (TextView) fl.findViewById(R.id.t);
-		Log.i("line", "50");
-//		t.setText("Shit");
-		Log.i("line", "52");
-		// preparing list data
-		Log.i("get", "prepare data 46");
 		prepareListData();
-		
-		Log.i("get", "list adapter49");
 		listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
-
 		// setting list adapter
-		Log.i("get", "set list adopter");
-		if(listAdapter == null)
-			Log.i("get", "list adapter is null!");
-		if(expListView == null)
-			Log.i("get", "expListView is null!");
 		expListView.setAdapter(listAdapter);
+		
+/*
+ *  Spinner
+ */
+		Spinner act_type = (Spinner) findViewById(R.id.activity_type);
+		List<String> actypes = prepareActtypes();
+		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
+         (this, android.R.layout.simple_spinner_item,actypes);
+		dataAdapter.setDropDownViewResource
+		         (android.R.layout.simple_spinner_dropdown_item);          
+		act_type.setAdapter(dataAdapter);
 
+	}
+
+	private List<String> prepareActtypes() {
+		// TODO Auto-generated method stub
+		List<String> actypes = new ArrayList<>();
+		actypes.add(ActivityType.HEAVY.toString());
+		actypes.add(ActivityType.NORMAL.toString());
+		actypes.add(ActivityType.LIGHT.toString());
+		actypes.add(ActivityType.UNKNOWN.toString());
+		
+		return actypes;
 	}
 
 	private void prepareListData() {
@@ -85,8 +102,10 @@ public class MainActivity extends ActionBarActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
+		 MenuInflater inflater = getMenuInflater();
+	     inflater.inflate(R.menu.activity_main_actions, menu);
+	 
+	     return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override

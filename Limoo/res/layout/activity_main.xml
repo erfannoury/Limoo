@@ -1,17 +1,82 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="org.limoo.limoo.MainActivity$PlaceholderFragment" >
-
+	
+     <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="false"
+        android:max="100"
+        android:minHeight="30dp"
+        android:minWidth="200dp"
+        android:progress="1" />
     
-    <ExpandableListView
+    <LinearLayout 
+        android:id="@+id/status_new"
+        android:orientation="horizontal"
+
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        
+        <TextView 
+            android:id="@+id/status"
+            android:layout_weight="4"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:text="خوبه!"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textSize="30dp"/>
+        <Button 
+            android:id="@+id/new_item"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="افزودن"/>
+        
+    </LinearLayout>
+	      <ExpandableListView
+
                 android:id="@+id/lvExp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_width="match_parent"/>
 
-</RelativeLayout>
+    
+         <LinearLayout
+
+        android:id="@+id/day_activity" 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <Spinner 
+            android:id="@+id/activity_type"
+            android:layout_weight="4"
+        	android:layout_width="0dp"
+        	android:layout_height="wrap_content"
+        	android:spinnerMode="dialog"
+        	android:prompt="@string/daily_activity_type"
+        	/>        
+    </LinearLayout>
+    <LinearLayout 
+        android:id="@+id/diary"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText 
+            android:id="@+id/diary_note"
+            android:minLines="3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="یادداشت روزانه"
+            
+            />
+    </LinearLayout>
+    
+        
+</LinearLayout>

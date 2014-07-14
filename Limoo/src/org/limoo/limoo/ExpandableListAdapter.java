@@ -99,7 +99,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 		Meal meal = (Meal) getGroup(groupPosition);
 		NumberFormat formatter = new DecimalFormat("#0.00");
 		String mealType = meal.getMealType().toString();
-		String mealEnergy = formatter.format(meal.getMealEnergy())+"کیلوکالری";
+		String mealEnergy = formatter.format(meal.getMealEnergy())+"کیلوکالری ";
 		if (convertView == null) {
 			LayoutInflater infalInflater = (LayoutInflater) this._context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

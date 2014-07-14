@@ -6,12 +6,24 @@ package model;
 public enum MealType
 {
     // sobhaneh
-    BREAKFAST,
+    BREAKFAST("صبحانه"),
     // nahar
-    LUNCH,
+    LUNCH("نهار"),
     // shaam
-    DINNER,
+    DINNER("شام"),
     // asraneh
-    AFTERNOON,
-    UNKNOWN
+    AFTERNOON("عصرانه"),
+    UNKNOWN("هله هوله!");
+    
+    private String value;
+    
+    MealType( String string) {
+		this.value = string;
+	}
+    
+    @Override
+    public String toString() {
+    	// TODO Auto-generated method stub
+    	return this.value;
+    }
 }
