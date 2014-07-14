@@ -11,6 +11,8 @@
 # Generated files
 bin/
 gen/
+build/
+Limoo/build/
 
 # Local configuration file (sdk path, etc)
 local.properties
