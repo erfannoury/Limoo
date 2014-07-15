@@ -10,7 +10,9 @@ public class MealEntryTableHelper extends SQLiteOpenHelper
 	 */
 	public static final String TBL_MEALENTRY = "FoodData";
 	public static final String COLUMN_ID = "_id";
-	public static final String COLUMN_TIME = "time";
+	public static final String COLUMN_TIME_YEAR = "time_year";
+	public static final String COLUMN_TIME_MONTH = "time_month";
+	public static final String COLUMN_TIME_DAY = "time_day";
 	public static final String COLUMN_AMOUNT = "amount";
 	public static final String COLUMN_FOODNAME = "foodname";
 	public static final String COLUMN_UNITNAME = "unitname";
@@ -27,7 +29,9 @@ public class MealEntryTableHelper extends SQLiteOpenHelper
 	private static final String CREATE_DB = "create table "
 			+ TBL_MEALENTRY + "(" 
 			+ COLUMN_ID + " integer primary key autoincrement, "
-			+ COLUMN_TIME + " string not null, "
+			+ COLUMN_TIME_YEAR + " integer not null, "
+			+ COLUMN_TIME_MONTH + " integer not null, "
+			+ COLUMN_TIME_DAY + " integer not null, "
 			+ COLUMN_AMOUNT + " real not null, "
 			+ COLUMN_FOODNAME + " string not null, "
 			+ COLUMN_UNITNAME + " string not null, "
