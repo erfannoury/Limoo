@@ -30,9 +30,9 @@ public class Meal
 	/*
 	 * Add a new FoodItem to the list of FoodItems of this meal
 	 */
-	public void addnewFoodItem(String foodName, FoodUnit unit, double amount)
+	public void addnewFoodItem(String foodName, FoodUnit unit, double amount, String creationTime)
 	{
-		this.foodItemsGroup.add(new FoodItem(foodName, unit, amount));
+		this.foodItemsGroup.add(new FoodItem(foodName, unit, amount, creationTime));
 	}
 	
 	
