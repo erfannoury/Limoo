@@ -27,12 +27,12 @@ public class FoodDataTableHelper extends SQLiteOpenHelper
 	 */
 	private static final String CREATE_DB = "create table "
 			+ TBL_FOODDATA + "(" 
-			+ COLUMN_ID + " integer primary key autoincrement, "
-			+ COLUMN_FOODNAME + " string not null, "
-			+ COLUMN_ISBASEUNIT + " integer not null, "
-			+ COLUMN_UNITNAME + " string not null, "
-			+ COLUMN_ENERGY + " real not null, "
-			+ COLUMN_MULTIPLIER + " real not null"
+			+ COLUMN_ID + " INTEGER PRIMARY KEY, "
+			+ COLUMN_FOODNAME + " TEXT, "
+			+ COLUMN_ISBASEUNIT + " INTEGER, "
+			+ COLUMN_UNITNAME + " TEXT, "
+			+ COLUMN_ENERGY + " REAL, "
+			+ COLUMN_MULTIPLIER + " REAL"
 			+ ");";
 	 
 	
