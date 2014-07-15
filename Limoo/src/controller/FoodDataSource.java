@@ -63,13 +63,14 @@ public class FoodDataSource
 	 */
 	public long addFoodData(String foodName, String unitName, double energy, double multiplier, boolean isBaseUnit)
 	{
+		SQLiteDatabase wdb = tblHelper.getWritableDatabase();
 		ContentValues val = new ContentValues();
 		val.put(FoodDataTableHelper.COLUMN_FOODNAME, foodName);
 		val.put(FoodDataTableHelper.COLUMN_UNITNAME, unitName);
 		val.put(FoodDataTableHelper.COLUMN_ENERGY, energy);
 		val.put(FoodDataTableHelper.COLUMN_MULTIPLIER, multiplier);
 		val.put(FoodDataTableHelper.COLUMN_ISBASEUNIT, isBaseUnit ? 1 : 0);
-		long insertID = db.insert(FoodDataTableHelper.TBL_FOODDATA, null, val);
+		long insertID = wdb.insert(FoodDataTableHelper.TBL_FOODDATA, null, val);
 		return insertID;
 	}
 	
@@ -80,8 +81,9 @@ public class FoodDataSource
 	 */
 	public int deleteFoodData(String foodName, String unitName)
 	{
+		SQLiteDatabase wdb = tblHelper.getWritableDatabase();
 		String whereClause = tblHelper.COLUMN_FOODNAME + " = " + foodName + " and " + tblHelper.COLUMN_UNITNAME + " = " + unitName;
-		int rowsDeleted = db.delete(tblHelper.TBL_FOODDATA, whereClause, null);
+		int rowsDeleted = wdb.delete(tblHelper.TBL_FOODDATA, whereClause, null);
 		return rowsDeleted;
 	}
 	
@@ -106,25 +108,30 @@ public class FoodDataSource
 	 */
 	public List<FoodData> getAllFoodData()
 	{
+		SQLiteDatabase rdb = tblHelper.getReadableDatabase();
 		HashMap<String, FoodData> allfoods = new HashMap<>();
 		
-		Cursor cur = db.query(tblHelper.TBL_FOODDATA, allcolumns, null, null, null, null, null);
-		cur.moveToFirst();
-		
-		while(!cur.isAfterLast())
+		Cursor cur = rdb.query(tblHelper.TBL_FOODDATA, allcolumns, null, null, null, null, null);
+		if(cur != null)
 		{
-			if(!allfoods.containsKey(cur.getString(1)))
+			cur.moveToFirst();
+			while(!cur.isAfterLast())
 			{
-				FoodData newFood = new FoodData(cur.getString(1), new FoodUnit(cur.getString(3), cur.getDouble(4), cur.getDouble(5)), cur.getString(2).equals("1") ? true : false);
-				allfoods.put(cur.getString(1), newFood);
+				if(!allfoods.containsKey(cur.getString(1)))
+				{
+					FoodData newFood = new FoodData(cur.getString(1), new FoodUnit(cur.getString(3), cur.getDouble(4), cur.getDouble(5)), cur.getString(2).equals("1") ? true : false);
+					allfoods.put(cur.getString(1), newFood);
+				}
+				else
+				{
+					allfoods.get(cur.getString(1)).addAdditionalUnit(new FoodUnit(cur.getString(3), cur.getDouble(4), cur.getDouble(5)), cur.getString(2).equals("1") ? true : false);
+				}
+				cur.moveToNext();
 			}
-			else
-			{
-				allfoods.get(cur.getString(1)).addAdditionalUnit(new FoodUnit(cur.getString(3), cur.getDouble(4), cur.getDouble(5)), cur.getString(2).equals("1") ? true : false);
-			}
-			cur.moveToNext();
+			cur.close();
+		
 		}
-		cur.close();
+		
 		
 		
 		// Convert values collection to list and return
@@ -143,16 +150,26 @@ public class FoodDataSource
 	 */
 	public FoodData getFoodData(String foodName) throws Exception
 	{
-		Cursor cur = db.query(tblHelper.TBL_FOODDATA, null, tblHelper.COLUMN_FOODNAME + " = " + foodName, null, null, null, null);
-		cur.moveToFirst();
-		if(cur.isAfterLast())
-			throw new Exception("Now results found for your search on FoodDataSource");
-		FoodData foodData = new FoodData(cur.getString(1), new FoodUnit(cur.getString(3), cur.getDouble(4), cur.getDouble(5)), cur.getString(2).equals("1") ? true : false);
-		cur.moveToNext();
-		while(!cur.isAfterLast())
+		SQLiteDatabase rdb = tblHelper.getReadableDatabase();
+		Cursor cur = rdb.query(tblHelper.TBL_FOODDATA, null, tblHelper.COLUMN_FOODNAME + " = " + foodName, null, null, null, null);
+		FoodData foodData = null;
+		if(cur != null)
 		{
-			foodData.addAdditionalUnit(new FoodUnit(cur.getString(3), cur.getDouble(4), cur.getDouble(5)), cur.getString(2).equals("1") ? true : false);
+			cur.moveToFirst();
+			if(cur.isAfterLast())
+				throw new Exception("No results found for your search on FoodDataSource");
+			foodData = new FoodData(cur.getString(1), new FoodUnit(cur.getString(3), cur.getDouble(4), cur.getDouble(5)), cur.getString(2).equals("1") ? true : false);
 			cur.moveToNext();
+			while(!cur.isAfterLast())
+			{
+				foodData.addAdditionalUnit(new FoodUnit(cur.getString(3), cur.getDouble(4), cur.getDouble(5)), cur.getString(2).equals("1") ? true : false);
+				cur.moveToNext();
+			}
+			
+		}
+		else
+		{
+			throw new Exception("No results found for your search on FoodDataSource");
 		}
 		return foodData;
 	}
