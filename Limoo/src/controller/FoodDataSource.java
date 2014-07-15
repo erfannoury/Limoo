@@ -76,6 +76,7 @@ public class FoodDataSource
 	/*
 	 * This will delete all the rows where foodname column matches foodName and unitname column matches unitName
 	 * If everything goes right, at most 1 row should be deleted
+	 * @return number of rows affected by this statement
 	 */
 	public int deleteFoodData(String foodName, String unitName)
 	{
