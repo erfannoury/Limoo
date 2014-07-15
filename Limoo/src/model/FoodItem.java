@@ -9,20 +9,19 @@ package model;
   This class defines the basic FoodItem object type. A FoodItem consists of a food, amount of it, unit of measurement and the time of
   the day this meal had been taken.
  */
-//TODO: where is the "time" of a FoodItem?
 public class FoodItem
 {
     private double amount;
     private String foodName;
     private FoodUnit unit;
-
+    private String createdAt;
     public FoodItem()
     {}
 
     /*
      Constructor
      */
-    public FoodItem(String _foodName, FoodUnit _unit, double _amount)
+    public FoodItem(String _foodName, FoodUnit _unit, double _amount, String time)
     {
         this.foodName = _foodName;
         this.unit = _unit;
@@ -57,6 +56,16 @@ public class FoodItem
     public double getEnergy()
     {
     	return this.unit.totalEnergy(this.amount);
+    }
+    
+    public String getCreatedAt()
+    {
+    	return this.createdAt;
+    }
+    
+    public void setCreationTime(String time)
+    {
+    	this.createdAt = time;
     }
 }
 
