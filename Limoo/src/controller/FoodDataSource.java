@@ -119,12 +119,16 @@ public class FoodDataSource
 			{
 				if(!allfoods.containsKey(cur.getString(1)))
 				{
-					FoodData newFood = new FoodData(cur.getString(1), new FoodUnit(cur.getString(3), cur.getDouble(4), cur.getDouble(5)), cur.getString(2).equals("1") ? true : false);
+					FoodData newFood = new FoodData(cur.getString(cur.getColumnIndex(tblHelper.COLUMN_FOODNAME)), new FoodUnit(cur.getString(cur.getColumnIndex(tblHelper.COLUMN_UNITNAME)),
+							cur.getDouble(cur.getColumnIndex(tblHelper.COLUMN_ENERGY)), cur.getDouble(cur.getColumnIndex(tblHelper.COLUMN_MULTIPLIER))),
+							cur.getString(cur.getColumnIndex(tblHelper.COLUMN_ISBASEUNIT)).equals("1") ? true : false);
 					allfoods.put(cur.getString(1), newFood);
 				}
 				else
 				{
-					allfoods.get(cur.getString(1)).addAdditionalUnit(new FoodUnit(cur.getString(3), cur.getDouble(4), cur.getDouble(5)), cur.getString(2).equals("1") ? true : false);
+					allfoods.get(cur.getString(cur.getColumnIndex(tblHelper.COLUMN_FOODNAME))).addAdditionalUnit(new FoodUnit(cur.getString(cur.getColumnIndex(tblHelper.COLUMN_UNITNAME)),
+							cur.getDouble(cur.getColumnIndex(tblHelper.COLUMN_ENERGY)), cur.getDouble(cur.getColumnIndex(tblHelper.COLUMN_MULTIPLIER))), 
+							cur.getString(cur.getColumnIndex(tblHelper.COLUMN_ISBASEUNIT)).equals("1") ? true : false);
 				}
 				cur.moveToNext();
 			}
@@ -158,11 +162,15 @@ public class FoodDataSource
 			cur.moveToFirst();
 			if(cur.isAfterLast())
 				throw new Exception("No results found for your search on FoodDataSource");
-			foodData = new FoodData(cur.getString(1), new FoodUnit(cur.getString(3), cur.getDouble(4), cur.getDouble(5)), cur.getString(2).equals("1") ? true : false);
+			foodData = new FoodData(cur.getString(cur.getColumnIndex(tblHelper.COLUMN_FOODNAME)), new FoodUnit(cur.getString(cur.getColumnIndex(tblHelper.COLUMN_UNITNAME)),
+					cur.getDouble(cur.getColumnIndex(tblHelper.COLUMN_ENERGY)), cur.getDouble(cur.getColumnIndex(tblHelper.COLUMN_MULTIPLIER))), 
+					cur.getString(cur.getColumnIndex(tblHelper.COLUMN_ISBASEUNIT)).equals("1") ? true : false);
 			cur.moveToNext();
 			while(!cur.isAfterLast())
 			{
-				foodData.addAdditionalUnit(new FoodUnit(cur.getString(3), cur.getDouble(4), cur.getDouble(5)), cur.getString(2).equals("1") ? true : false);
+				foodData.addAdditionalUnit(new FoodUnit(cur.getString(cur.getColumnIndex(tblHelper.COLUMN_UNITNAME)),
+						cur.getDouble(cur.getColumnIndex(tblHelper.COLUMN_ENERGY)), cur.getDouble(cur.getColumnIndex(tblHelper.COLUMN_MULTIPLIER))),
+						cur.getString(cur.getColumnIndex(tblHelper.COLUMN_ISBASEUNIT)).equals("1") ? true : false);
 				cur.moveToNext();
 			}
 			
